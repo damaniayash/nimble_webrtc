@@ -1,0 +1,31 @@
+# Base image
+FROM python:3.10
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      bzip2 \
+      g++ \
+      git \
+      graphviz \
+      libgl1-mesa-glx \
+      libhdf5-dev \
+      openmpi-bin \
+      wget \
+      libavdevice-dev \
+      libavfilter-dev \
+      libopus-dev \
+      libvpx-dev \
+      pkg-config \
+      libsrtp2-dev \
+      python3-tk && \
+    rm -rf /var/lib/apt/lists/*
+    
+RUN mkdir /src
+WORKDIR /src
+
+COPY server.py .
+COPY ball_frames.py . 
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+CMD ["python", "server.py"]
