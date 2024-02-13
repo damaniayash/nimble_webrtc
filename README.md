@@ -45,8 +45,9 @@ This is a simple WebRTC based application where a server sending frames of a bou
 
 ## Reflections
 
-- The code is structed in a way that it is not easy to be unit testable. Could improve the code structure. Improve tests.
-- Making a shell scripts to take care of deployment. Ran out of time.
+- Making a shell scripts to take care of deployment. 
+- Need to add more tests for signalling. Ran out of time.
+- Could have structured client side in a better way.
 
 
 
