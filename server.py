@@ -3,8 +3,6 @@ import numpy as np
 from aiortc.contrib.signaling import TcpSocketSignaling, BYE
 from av import VideoFrame
 from aiortc import RTCPeerConnection, RTCSessionDescription, RTCIceCandidate
-from aiortc import MediaStreamTrack
-from aiortc.contrib.media import MediaBlackhole
 from ball_frames import BallTrack
 
 
@@ -57,12 +55,10 @@ class Server:
                 print("Circle not found, skipping frame")
             channel.send("Coordinates received")
 
-        # send offer
         pc.addTrack(balltrack)
         await pc.setLocalDescription(await pc.createOffer())
         await signaling.send(pc.localDescription)
 
-        # consume signaling
         while True:
             obj = await signaling.receive()
 
@@ -72,6 +68,7 @@ class Server:
             elif obj is None:
                 print("Exiting")
                 break
+
 
 if __name__ == "__main__":
     host, port = "127.0.0.1", 8080

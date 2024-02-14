@@ -54,7 +54,7 @@ class Client:
 
     async def display_ball(self, track):
         """
-        This takes in track and displays the ball.
+        This takes in track and displays the ball
         """
         while True:
             try:
@@ -63,9 +63,7 @@ class Client:
                 self.frame_queue.put(frame_arr)
 
                 cv2.imshow("Client Window", frame_arr)
-                if (
-                    cv2.waitKey(1) == ord("q")
-                ):
+                if cv2.waitKey(1) == ord("q"):
                     print("Press cntrl + C to exit")
                     cv2.destroyAllWindows()
                     self.process_a.join()
@@ -98,7 +96,6 @@ class Client:
             Args:
                 channel: Data channel for communication.
             """
-
 
             @channel.on("message")
             def on_message(message):
@@ -140,4 +137,3 @@ if __name__ == "__main__":
     finally:
         asyncio.run(peer_connection.close())
         asyncio.run(socket_signaling.close())
-       
